@@ -25,7 +25,6 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     mavenCentral()
-    maven { url "http://packages.confluent.io/maven/" }
     maven { url "http://repo.typesafe.com/typesafe/releases/" }
 }
 dependencies {
@@ -37,12 +36,18 @@ dependencies {
 
     shadow "org.apache.spark:spark-core_$scalaMajorVersion:$sparkVersion"
     shadow "org.apache.spark:spark-sql_$scalaMajorVersion:$sparkVersion"
-//    shadow "org.apache.spark:spark-streaming_$scalaMajorVersion:$sparkVersion"
-//    implementation("org.apache.spark:spark-sql-kafka-0-10_$scalaMajorVersion:$sparkVersion")
+    shadow "org.apache.spark:spark-hive_$scalaMajorVersion:$sparkVersion"
 
     testCompile "org.scalatest:scalatest_$scalaMajorVersion:$scalaTestVersion"
     testRuntime "org.pegdown:pegdown:$pegdownVersion"
     testRuntime "org.slf4j:slf4j-log4j12:$slf4jVersion"
+}
+
+configurations.testCompile {
+    extendsFrom configurations.shadow
+}
+configurations.runtime {
+    extendsFrom configurations.shadow
 }
 
 application {
