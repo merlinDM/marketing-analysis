@@ -1,8 +1,6 @@
 package com.gd.model
 
 import java.sql.Timestamp
-import java.text.SimpleDateFormat
-import java.util.Date
 
 import org.apache.spark.sql.{DataFrame, SparkSession}
 

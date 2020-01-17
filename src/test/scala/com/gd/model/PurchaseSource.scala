@@ -4,7 +4,7 @@ import java.sql.Timestamp
 
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
-class EventSource extends DateParser {
+class PurchaseSource extends DateParser {
 
   private def spark: SparkSession = SparkSession.builder().getOrCreate()
 
