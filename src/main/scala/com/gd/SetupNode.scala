@@ -6,6 +6,7 @@ class SetupNode {
 
   def init(): Unit = {
 
+    // TODO: find what is production env
     val spark = SparkSession
       .builder()
       .appName("marketing-attribution")
