@@ -5,6 +5,9 @@ object App {
   def main(args: Array[String]): Unit = {
     // TODO: Read all configurations from file
 
+    val setupNode = new SetupNode()
+    setupNode.init()
+
     val eventSourceConfig = HiveSourceConfiguration(input = "default.event")
     val eventSource = new HiveSource(eventSourceConfig)
     val events = eventSource.read()
