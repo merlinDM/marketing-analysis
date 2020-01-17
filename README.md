@@ -1,6 +1,6 @@
 ## Marketing Analytics
 
-The project is dedicated to building enabling a marketing attribution projection subsequent analysis of marketing campaigns and channels.
+The project is dedicated to building a marketing attribution projection for subsequent analysis of marketing campaigns and channels.
 
 ### Assumptions
 * Event DS >> Purchase DS;
@@ -39,7 +39,7 @@ Aggregates are stored as:
 * default.engagement
 
 ### TODOs:
-* Tasks #1.2 has not been implemented;
+* Task #1.2 has not been implemented due to the lack of time;
 * Read configuration from file;
 * Add partitioning (by month?) and bucketing (by user) to events and purchases;
 * Create more test cases, app_opens without attributes for example.
