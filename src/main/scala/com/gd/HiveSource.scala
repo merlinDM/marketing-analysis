@@ -2,8 +2,9 @@ package com.gd
 
 import org.apache.spark.sql.{DataFrame, SaveMode, SparkSession}
 
-class HiveSource(spark: SparkSession,
-                 cfg: HiveSourceConfiguration = HiveSourceConfiguration()) {
+class HiveSource(cfg: HiveSourceConfiguration = HiveSourceConfiguration()) {
+
+  private def spark: SparkSession = SparkSession.builder().getOrCreate()
 
   def read(): DataFrame = {
 
