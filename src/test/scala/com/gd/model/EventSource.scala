@@ -6,7 +6,7 @@ import java.util.Date
 
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
-class EventSource {
+class EventSource extends DateParser {
 
   private def spark: SparkSession = SparkSession.builder().getOrCreate()
 
@@ -50,13 +50,6 @@ class EventSource {
     EventRecord(userId = "u3", eventId = "u3_e17", eventTime = parseDate("2019-01-02 2:15:00"), eventType = "purchase", attributes = Some(Map("purchaseId" -> "p5"))),
     EventRecord(userId = "u3", eventId = "u3_e18", eventTime = parseDate("2019-01-02 2:15:40"), eventType = "app_close", attributes = None)
   )
-
-  private def parseDate(s: String): Timestamp = {
-    val format = new SimpleDateFormat("yyyy-MM-dd H:mm:ss")
-    val date: Date = format.parse(s)
-
-    new Timestamp(date.getTime)
-  }
 
 }
 
