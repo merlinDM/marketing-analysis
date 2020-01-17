@@ -12,7 +12,7 @@ class AttributionNode(cfg: AttributionNodeConfiguration = AttributionNodeConfigu
 
     val recordedPurchases = retrievePurchases(sessions)
 
-    purchases.join(recordedPurchases, Seq("purchaseId"), "inner")
+    purchases.join(recordedPurchases, Seq("purchaseId"), "full")
   }
 
   private def retrieveSessions(events: DataFrame): DataFrame = {
@@ -60,7 +60,7 @@ class AttributionNode(cfg: AttributionNodeConfiguration = AttributionNodeConfigu
     )
 
     val purchases = groupedSessions
-      .withColumn("purchaseId", explode($"purchases"))
+      .withColumn("purchaseId", explode_outer($"purchases"))
       .drop("purchases")
 
 //    purchases

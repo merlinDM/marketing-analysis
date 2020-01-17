@@ -48,6 +48,10 @@ class AttributionNodeTest extends FunSuite {
     val diff = attributions.exceptAll(expectedAttributions)
     diff.sort("purchaseId").show(truncate = false)
 
+//    attributions.show()
+//    attributions.printSchema()
+//    expectedAttributions.printSchema()
+
     assert(attributions.schema.equals(expectedAttributions.schema),
       "Resulted dataset should have the same schema as expected one.")
 
