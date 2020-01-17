@@ -11,8 +11,8 @@ class RevenueTopSource extends DateParser {
   }
 
   private val data = Seq(
-    RevenueTopRecord(campaignId = "cmp1", revenue = Some(400.5)),
-    RevenueTopRecord(campaignId = "cmp2", revenue = Some(325.2))
+    RevenueTopRecord(campaignId = "cmp1", revenue = Some(300.5)),
+    RevenueTopRecord(campaignId = "cmp2", revenue = Some(125.2))
   )
 
 }

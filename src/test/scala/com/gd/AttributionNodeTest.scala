@@ -71,9 +71,6 @@ class AttributionNodeTest extends FunSuite {
 
     val diff = topByRevenue.exceptAll(expectedTop)
 
-    assert(topByRevenue.schema.equals(expectedTop),
-      "Resulted dataset should have the same schema as expected one.")
-
     assert(diff.isEmpty,
       "Resulted dataset should be equivalent to the expected one.")
   }
