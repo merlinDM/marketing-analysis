@@ -25,10 +25,8 @@ class AttributionNode(cfg: AttributionNodeConfiguration = AttributionNodeConfigu
       lit(0)
     )
 
-    // TODO: move to node cfg
-    val oneHourInSeconds = 60 * 60
     val newSessionOnTimeoutS = $"eventTime".cast(IntegerType) -
-      lag($"eventTime".cast(IntegerType), 1, Integer.MAX_VALUE).over(wnd) > oneHourInSeconds
+      lag($"eventTime".cast(IntegerType), 1, Integer.MAX_VALUE).over(wnd) > cfg.timeoutSeconds
 
     val newSessionOnAppOpen = $"eventType".equalTo("app_open")
 
@@ -74,4 +72,4 @@ class AttributionNode(cfg: AttributionNodeConfiguration = AttributionNodeConfigu
 
 }
 
-case class AttributionNodeConfiguration()
+case class AttributionNodeConfiguration(timeoutSeconds: Integer = Integer.MAX_VALUE)
