@@ -17,12 +17,23 @@ class InsightQuery {
       .where("isConfirmed")
       .groupBy("campaignId")
       .agg(sum("billingCost").as("revenue"))
-      .withColumn("rnk", dense_rank().over(wnd).as("rnk"))
+      .withColumn("rnk", row_number().over(wnd))
       .where("rnk < 11")
       .drop("rnk")
   }
 
   def channelEngagement(attribution: DataFrame): DataFrame = {
-    attribution
+    import attribution.sparkSession.implicits._
+
+    val wnd = Window.partitionBy("campaignId").orderBy($"cnt".desc)
+
+    val res = attribution
+      .groupBy("campaignId", "channelId")
+      .agg(count("*").as("cnt"))
+      .withColumn("rnk", row_number().over(wnd))
+      .where("rnk = 1")
+      .drop("rnk", "cnt")
+
+    res
   }
 }

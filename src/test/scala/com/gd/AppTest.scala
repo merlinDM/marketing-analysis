@@ -1,10 +1,10 @@
 package com.gd
 
-import com.gd.model.{AttributionSource, RevenueTopRecord, RevenueTopSource, EventSource, PurchaseSource}
+import com.gd.model.{AttributionSource, EngagementSource, EventSource, PurchaseSource, RevenueTopRecord, RevenueTopSource}
 import org.apache.spark.sql.SparkSession
 import org.scalatest.FunSuite
 
-class AttributionNodeTest extends FunSuite {
+class AppTest extends FunSuite {
 
   SparkSession
     .builder()
@@ -82,13 +82,10 @@ class AttributionNodeTest extends FunSuite {
     val query = new InsightQuery()
     val engagement = query.channelEngagement(attributions)
 
-    val engagementSource = new RevenueTopSource()
+    val engagementSource = new EngagementSource()
     val expectedEngagement = engagementSource.read()
 
     val diff = expectedEngagement.exceptAll(engagement)
-
-    assert(engagement.schema.equals(expectedEngagement),
-      "Resulted dataset should have the same schema as expected one.")
 
     assert(diff.isEmpty,
       "Resulted dataset should be equivalent to the expected one.")
