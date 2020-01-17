@@ -1,6 +1,6 @@
 package com.gd
 
-import com.gd.model.{AttributionSource, EngagementSource, EventSource, PurchaseSource, RevenueTopRecord, RevenueTopSource}
+import com.gd.model._
 import org.apache.spark.sql.SparkSession
 import org.scalatest.FunSuite
 
