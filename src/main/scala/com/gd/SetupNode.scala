@@ -12,6 +12,7 @@ class SetupNode {
       .master("local[*]")
       .config("spark.driver.host", "localhost")
       .config("spark.local.dir", "/tmp/spark")
+      .enableHiveSupport()
       .getOrCreate()
 
     spark.sql("""CREATE TABLE IF NOT EXISTS default.event (
@@ -49,7 +50,7 @@ class SetupNode {
 
     spark.sql(
       """CREATE TABLE IF NOT EXISTS default.top_campaign (
-        |     campaignId: STRING, revenue: DOUBLE
+        |     campaignId STRING, revenue DOUBLE
         |   )
         |STORED AS PARQUET
         |""".stripMargin
@@ -57,7 +58,7 @@ class SetupNode {
 
     spark.sql(
       """CREATE TABLE IF NOT EXISTS default.engagement (
-        |     campaignId: STRING, channelId: STRING
+        |     campaignId STRING, channelId STRING
         |   )
         |STORED AS PARQUET
         |""".stripMargin

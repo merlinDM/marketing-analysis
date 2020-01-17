@@ -46,6 +46,9 @@ dependencies {
 configurations.testCompile {
     extendsFrom configurations.shadow
 }
+configurations.runtime {
+    extendsFrom configurations.shadow
+}
 
 application {
     mainClassName = 'com.gd.App'

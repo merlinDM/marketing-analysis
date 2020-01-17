@@ -17,6 +17,7 @@ class HiveSource(cfg: HiveSourceConfiguration = HiveSourceConfiguration()) {
     // Throws exception if schemas doesn't match and ensures correct column ordering.
     df.write
       .mode(cfg.mode)
+      .format("hive")
       .saveAsTable(cfg.output)
 
   }
