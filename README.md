@@ -40,5 +40,6 @@ Aggregates are stored as:
 
 ### TODOs:
 * Read configuration from file;
+* Utilize typesafe.scala-logging library;
 * Add partitioning (by month?) and bucketing (by user) to events and purchases;
 * Create more test cases, app_opens without attributes for example.
