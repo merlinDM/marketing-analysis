@@ -6,10 +6,20 @@ import org.scalatest.FunSuite
 
 class AppTest extends FunSuite {
 
+  private def disableLogging(): Unit = {
+    import org.apache.log4j.Logger
+    import org.apache.log4j.Level
+
+    Logger.getLogger("org.apache.spark").setLevel(Level.OFF)
+    Logger.getLogger("akka").setLevel(Level.OFF)
+  }
+
+  disableLogging()
+
   SparkSession
     .builder()
     .appName("marketing-attribution-test")
-    .master("local[*]")
+    .master("local[1]")
     .config("spark.driver.host", "localhost")
     .config("spark.local.dir", "/tmp/spark")
     .getOrCreate()

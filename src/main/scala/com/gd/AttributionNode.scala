@@ -6,9 +6,8 @@ class AttributionNode(cfg: AttributionNodeConfiguration = AttributionNodeConfigu
 
   def join(events: DataFrame, purchases: DataFrame): DataFrame = {
     val node = cfg.implementation match {
-      case AttributionNodeSQLImpl => {
+      case AttributionNodeSQLImpl =>
         new AttributionNodeSQL(cfg)
-      }
       case AttributionNodeAggImpl =>
         new AttributionNodeAgg(cfg)
     }
@@ -20,7 +19,7 @@ class AttributionNode(cfg: AttributionNodeConfiguration = AttributionNodeConfigu
 
 case class AttributionNodeConfiguration(
   timeoutSeconds: Integer = Integer.MAX_VALUE,
-  implementation: AttributionNodeImpl = AttributionNodeSQLImpl
+  implementation: AttributionNodeImpl = AttributionNodeAggImpl
 )
 
 sealed trait AttributionNodeImpl
