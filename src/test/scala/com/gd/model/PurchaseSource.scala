@@ -2,6 +2,7 @@ package com.gd.model
 
 import java.sql.Timestamp
 
+import com.gd.PurchaseRecord
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 class PurchaseSource extends DateParser {
@@ -21,8 +22,3 @@ class PurchaseSource extends DateParser {
   )
 
 }
-
-case class PurchaseRecord(purchaseId: String,
-                          purchaseTime: Timestamp,
-                          billingCost: Double,
-                          isConfirmed: Boolean)

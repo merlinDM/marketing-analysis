@@ -2,6 +2,7 @@ package com.gd.model
 
 import java.sql.Timestamp
 
+import com.gd.EventRecord
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 class EventSource extends DateParser {
@@ -50,9 +51,3 @@ class EventSource extends DateParser {
   )
 
 }
-
-case class EventRecord(userId: String,
-                       eventId: String,
-                       eventTime: Timestamp,
-                       eventType: String,
-                       attributes: Option[Map[String, String]])

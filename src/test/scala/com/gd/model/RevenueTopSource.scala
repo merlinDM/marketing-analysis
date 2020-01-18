@@ -1,5 +1,6 @@
 package com.gd.model
 
+import com.gd.RevenueTopRecord
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 class RevenueTopSource extends DateParser {
@@ -16,5 +17,3 @@ class RevenueTopSource extends DateParser {
   )
 
 }
-
-case class RevenueTopRecord(campaignId: String, revenue: Option[Double])

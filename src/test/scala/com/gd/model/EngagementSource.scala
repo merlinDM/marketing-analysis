@@ -1,5 +1,6 @@
 package com.gd.model
 
+import com.gd.EngagementRecord
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 class EngagementSource extends DateParser {
@@ -16,5 +17,3 @@ class EngagementSource extends DateParser {
   )
 
 }
-
-case class EngagementRecord(campaignId: String, channelId: String)

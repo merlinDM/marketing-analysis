@@ -1,7 +1,6 @@
 package com.gd.model
 
-import java.sql.Timestamp
-
+import com.gd.AttributionRecord
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 class AttributionSource extends DateParser {
@@ -24,12 +23,3 @@ class AttributionSource extends DateParser {
   )
 
 }
-
-case class AttributionRecord(purchaseId: Option[String],
-                             purchaseTime: Option[Timestamp],
-                             billingCost: Option[Double],
-                             isConfirmed: Option[Boolean],
-                             sessionId: Option[String],
-                             campaignId: Option[String],
-                             channelId: Option[String]
-                            )
