@@ -1,15 +1,8 @@
 package com.gd.model
 
 import com.gd.AttributionRecord
-import org.apache.spark.sql.{DataFrame, SparkSession}
 
-class AttributionSource extends DateParser {
-
-  private def spark: SparkSession = SparkSession.builder().getOrCreate()
-
-  def read(): DataFrame = {
-    spark.createDataFrame(data)
-  }
+class AttributionSource extends SampleSource[AttributionRecord] with DateParser {
 
   val data = Seq(
     AttributionRecord(purchaseId = Some("p1"),	purchaseTime = Some(parseDate("2019-01-01 0:01:05")),	billingCost = Some(100.5), isConfirmed = Some(true), sessionId = Some("u1_1"), campaignId = Some("cmp1"), channelId = Some("Google Ads")),
