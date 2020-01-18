@@ -1,17 +1,8 @@
 package com.gd.model
 
-import java.sql.Timestamp
-
 import com.gd.PurchaseRecord
-import org.apache.spark.sql.{DataFrame, SparkSession}
 
-class PurchaseSource extends DateParser {
-
-  private def spark: SparkSession = SparkSession.builder().getOrCreate()
-
-  def read(): DataFrame = {
-    spark.createDataFrame(data)
-  }
+class PurchaseSource extends SampleSource[PurchaseRecord] with DateParser {
 
   val data = Seq(
     PurchaseRecord(purchaseId = "p1",	purchaseTime = parseDate("2019-01-01 0:01:05"),	billingCost = 100.5, isConfirmed = true),

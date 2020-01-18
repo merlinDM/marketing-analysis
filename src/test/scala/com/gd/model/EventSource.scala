@@ -1,17 +1,8 @@
 package com.gd.model
 
-import java.sql.Timestamp
-
 import com.gd.EventRecord
-import org.apache.spark.sql.{DataFrame, SparkSession}
 
-class EventSource extends DateParser {
-
-  private def spark: SparkSession = SparkSession.builder().getOrCreate()
-
-  def read(): DataFrame = {
-    spark.createDataFrame(data)
-  }
+class EventSource extends SampleSource[EventRecord] with DateParser {
 
   val data = Seq(
     EventRecord(userId = "u1", eventId = "u1_e1", eventTime = parseDate("2019-01-01 0:00:00"), eventType = "app_open", attributes = Some(Map("campaignId" -> "cmp1", "channelId" -> "Google Ads"))),
