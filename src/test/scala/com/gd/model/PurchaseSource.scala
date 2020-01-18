@@ -13,7 +13,7 @@ class PurchaseSource extends DateParser {
     spark.createDataFrame(data)
   }
 
-  private val data = Seq(
+  val data = Seq(
     PurchaseRecord(purchaseId = "p1",	purchaseTime = parseDate("2019-01-01 0:01:05"),	billingCost = 100.5, isConfirmed = true),
     PurchaseRecord(purchaseId = "p2",	purchaseTime = parseDate("2019-01-01 0:03:10"),	billingCost = 200, isConfirmed = true),
     PurchaseRecord(purchaseId = "p3",	purchaseTime = parseDate("2019-01-01 1:12:15"),	billingCost = 300, isConfirmed = false),

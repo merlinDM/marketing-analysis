@@ -11,7 +11,7 @@ class RevenueTopSource extends DateParser {
     spark.createDataFrame(data)
   }
 
-  private val data = Seq(
+  val data = Seq(
     RevenueTopRecord(campaignId = "cmp1", revenue = Some(300.5)),
     RevenueTopRecord(campaignId = "cmp2", revenue = Some(125.2))
   )

@@ -13,7 +13,7 @@ class EventSource extends DateParser {
     spark.createDataFrame(data)
   }
 
-  private val data = Seq(
+  val data = Seq(
     EventRecord(userId = "u1", eventId = "u1_e1", eventTime = parseDate("2019-01-01 0:00:00"), eventType = "app_open", attributes = Some(Map("campaignId" -> "cmp1", "channelId" -> "Google Ads"))),
     EventRecord(userId = "u1", eventId = "u1_e2", eventTime = parseDate("2019-01-01 0:00:05"), eventType = "search_product", attributes = None),
     EventRecord(userId = "u1", eventId = "u1_e3", eventTime = parseDate("2019-01-01 0:00:10"), eventType = "search_product", attributes = None),

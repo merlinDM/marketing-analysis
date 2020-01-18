@@ -11,7 +11,7 @@ class EngagementSource extends DateParser {
     spark.createDataFrame(data)
   }
 
-  private val data = Seq(
+  val data = Seq(
     EngagementRecord(campaignId = "cmp1", channelId = "Google Ads"),
     EngagementRecord(campaignId = "cmp2", channelId = "Yandex Ads")
   )
