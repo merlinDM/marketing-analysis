@@ -39,7 +39,6 @@ Aggregates are stored as:
 * default.engagement
 
 ### TODOs:
-* Task #1.2 has not been implemented due to the lack of time;
 * Read configuration from file;
 * Add partitioning (by month?) and bucketing (by user) to events and purchases;
 * Create more test cases, app_opens without attributes for example.

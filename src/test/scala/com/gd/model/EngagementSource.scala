@@ -1,5 +1,6 @@
 package com.gd.model
 
+import com.gd.EngagementRecord
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 class EngagementSource extends DateParser {
@@ -10,11 +11,9 @@ class EngagementSource extends DateParser {
     spark.createDataFrame(data)
   }
 
-  private val data = Seq(
+  val data = Seq(
     EngagementRecord(campaignId = "cmp1", channelId = "Google Ads"),
     EngagementRecord(campaignId = "cmp2", channelId = "Yandex Ads")
   )
 
 }
-
-case class EngagementRecord(campaignId: String, channelId: String)

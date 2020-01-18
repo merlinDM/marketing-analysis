@@ -6,10 +6,20 @@ import org.scalatest.FunSuite
 
 class AppTest extends FunSuite {
 
+  private def disableLogging(): Unit = {
+    import org.apache.log4j.Logger
+    import org.apache.log4j.Level
+
+    Logger.getLogger("org.apache.spark").setLevel(Level.OFF)
+    Logger.getLogger("akka").setLevel(Level.OFF)
+  }
+
+  disableLogging()
+
   SparkSession
     .builder()
     .appName("marketing-attribution-test")
-    .master("local[*]")
+    .master("local[1]")
     .config("spark.driver.host", "localhost")
     .config("spark.local.dir", "/tmp/spark")
     .getOrCreate()
@@ -31,7 +41,7 @@ class AppTest extends FunSuite {
     attributions.show(100, truncate = false)
   }
 
-  test("test AttributionNode.join()") {
+  test("test SQL implementation of AttributionNode.join()") {
 
     val eventSource = new EventSource()
     val events = eventSource.read()
@@ -39,7 +49,8 @@ class AppTest extends FunSuite {
     val purchaseSource = new PurchaseSource()
     val purchases = purchaseSource.read()
 
-    val attributionNode = new AttributionNode()
+    val cfg = AttributionNodeConfiguration(implementation = AttributionNodeSQLImpl)
+    val attributionNode = new AttributionNode(cfg)
     val attributions = attributionNode.join(events, purchases)
 
     val attributionSource = new AttributionSource()
@@ -51,6 +62,35 @@ class AppTest extends FunSuite {
 //    attributions.show()
 //    attributions.printSchema()
 //    expectedAttributions.printSchema()
+
+    assert(attributions.schema.equals(expectedAttributions.schema),
+      "Resulted dataset should have the same schema as expected one.")
+
+    assert(diff.isEmpty,
+      "Resulted dataset should be equivalent to the expected one.")
+  }
+
+  test("test Aggregator implementation of AttributionNode.join()") {
+
+    val eventSource = new EventSource()
+    val events = eventSource.read()
+
+    val purchaseSource = new PurchaseSource()
+    val purchases = purchaseSource.read()
+
+    val cfg = AttributionNodeConfiguration(implementation = AttributionNodeAggImpl)
+    val attributionNode = new AttributionNode(cfg)
+    val attributions = attributionNode.join(events, purchases)
+
+    val attributionSource = new AttributionSource()
+    val expectedAttributions = attributionSource.read()
+
+    val diff = attributions.exceptAll(expectedAttributions)
+    //    diff.sort("purchaseId").show(truncate = false)
+
+    //    attributions.show()
+    //    attributions.printSchema()
+    //    expectedAttributions.printSchema()
 
     assert(attributions.schema.equals(expectedAttributions.schema),
       "Resulted dataset should have the same schema as expected one.")

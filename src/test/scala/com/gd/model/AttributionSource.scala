@@ -1,7 +1,6 @@
 package com.gd.model
 
-import java.sql.Timestamp
-
+import com.gd.AttributionRecord
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 class AttributionSource extends DateParser {
@@ -12,7 +11,7 @@ class AttributionSource extends DateParser {
     spark.createDataFrame(data)
   }
 
-  private val data = Seq(
+  val data = Seq(
     AttributionRecord(purchaseId = Some("p1"),	purchaseTime = Some(parseDate("2019-01-01 0:01:05")),	billingCost = Some(100.5), isConfirmed = Some(true), sessionId = Some("u1_1"), campaignId = Some("cmp1"), channelId = Some("Google Ads")),
     AttributionRecord(purchaseId = Some("p2"),	purchaseTime = Some(parseDate("2019-01-01 0:03:10")),	billingCost = Some(200), isConfirmed = Some(true), sessionId = Some("u2_1"), campaignId = Some("cmp1"), channelId = Some("Yandex Ads")),
     AttributionRecord(purchaseId = Some("p3"),	purchaseTime = Some(parseDate("2019-01-01 1:12:15")),	billingCost = Some(300), isConfirmed = Some(false), sessionId = Some("u3_2"), campaignId = Some("cmp1"), channelId = Some("Google Ads")),
@@ -24,12 +23,3 @@ class AttributionSource extends DateParser {
   )
 
 }
-
-case class AttributionRecord(purchaseId: Option[String],
-                             purchaseTime: Option[Timestamp],
-                             billingCost: Option[Double],
-                             isConfirmed: Option[Boolean],
-                             sessionId: Option[String],
-                             campaignId: Option[String],
-                             channelId: Option[String]
-                            )
